@@ -1,0 +1,29 @@
+# Composer dependencies
+/vendor/
+
+# PHPUnit cache
+.phpunit.result.cache
+
+# OS-filer
+.DS_Store
+Thumbs.db
+
+# IDEs og editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Test coverage (fx fra Xdebug eller PHPUnit)
+coverage/
+
+# Backup-filer
+*.bak
+*.tmp
+
+# dotenv filer (hvis du senere bruger dem)
+.env
+.env.*
