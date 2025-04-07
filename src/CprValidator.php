@@ -6,6 +6,12 @@ use Carbon\Carbon;
 
 class CprValidator
 {
+    /**
+     * Validate a CPR number.
+     *
+     * @param string $cpr The CPR number to validate.
+     * @return bool True if the CPR number is valid, false otherwise.
+     */
     public static function isValid(string $cpr): bool
     {
         $cpr = preg_replace('/[^0-9]/', '', $cpr);
@@ -28,6 +34,12 @@ class CprValidator
         return Carbon::createFromFormat('Y-m-d', sprintf('%04d-%02d-%02d', $fullYear, $month, $day), 'UTC') !== false;
     }
 
+    /**
+     * Get the birthdate from a CPR number.
+     *
+     * @param string $cpr The CPR number.
+     * @return Carbon|null The birthdate as a Carbon instance, or null if invalid.
+     */
     public static function getBirthdate(string $cpr): ?Carbon
     {
         if (!self::isValid($cpr)) {
@@ -49,6 +61,10 @@ class CprValidator
         return Carbon::createFromDate($century + $year, $month, $day);
     }
 
+    /**
+     * @param  string  $cpr
+     * @return string|null
+     */
     public static function getGender(string $cpr): ?string
     {
         $cpr = preg_replace('/[^0-9]/', '', $cpr);
@@ -61,6 +77,11 @@ class CprValidator
         return $lastDigit % 2 === 0 ? 'female' : 'male';
     }
 
+    /**
+     * @param  int  $serial
+     * @param  int  $year
+     * @return int|null
+     */
     private static function getCenturyFromSerial(int $serial, int $year): ?int
     {
         if ($serial >= 0 && $serial <= 3999) {
